@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GiftPicker - подбор подарков</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Шапка с навигацией -->
+        <header class="header">
+            <nav class="nav">
+    <a href="index.html" class="nav-link active">Главная</a>
+    <a href="about.html" class="nav-link">О сервисе</a>
+    <a href="contacts.html" class="nav-link">Контакты</a>
+</nav>
+        </header>
+
+        <div class="container">
+            <!-- Прогресс-бар -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <!-- Карточка с вопросами -->
+            <div class="card" id="card">
+                <h1 class="title" id="title">Для кого выбираем подарок?</h1>
+                <div class="options" id="optionsContainer"></div>
+                <div class="navigation" id="navigation">
+                    <button class="nav-btn back-btn" id="backBtn" disabled>← Назад</button>
+                    <span class="step-counter" id="stepCounter">1 / 5</span>
+                </div>
+            </div>
+            <!-- Финальный экран -->
+            <div class="card final-card" id="finalCard" style="display: none;">
+                <div class="final-content">
+                    <img src="img/gift.png" alt="Подарок" class="success-image">
+                    <h2 class="final-title">Подарки подобраны!</h2>
+                    <p class="final-subtitle">Куда отправимся за покупками?</p>
+                    <div class="marketplace-options">
+                      <button class="marketplace-btn ozon-btn" id="ozonBtn">
+    <img src="img/ozon.jpg" alt="Ozon" class="marketplace-icon-img" width="30" height="25" style="object-fit: contain;">
+    <span class="marketplace-name">Ozon</span>
+    <span class="marketplace-hint">Широкий выбор, быстрая доставка</span>
+</button>
+
+<button class="marketplace-btn wb-btn" id="wbBtn">
+    <img src="img/wb.jpg" alt="Wildberries" class="marketplace-icon-img" width="30" height="25" style="object-fit: contain;">
+    <span class="marketplace-name">Wildberries</span>
+    <span class="marketplace-hint">Одежда, аксессуары, товары для дома</span>
+</button>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="restart-btn" id="restartBtn">← Пройти заново</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Загрузчик -->
+            <div class="loader" id="loader" style="display: none;">
+                <div class="spinner"></div>
+                <p id="loaderText">Открываем маркетплейс...</p>
+            </div>
+        </div>
+    </div>
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">© 2026 GiftPicker - подбор идеальных подарков</p>
+            <div class="footer-links">
+                <a href="about.html" class="footer-link">О сервисе</a>
+                <span class="footer-divider">•</span>
+                <a href="contacts.html" class="footer-link">Контакты</a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

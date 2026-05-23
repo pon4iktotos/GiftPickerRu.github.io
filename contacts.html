@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - GiftPicker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Шапка с навигацией -->
+        <header class="header">
+            <nav class="nav">
+    <a href="index.html" class="nav-link">Главная</a>
+    <a href="about.html" class="nav-link">О сервисе</a>
+    <a href="contacts.html" class="nav-link active">Контакты</a>
+</nav>
+        </header>
+        <div class="container">
+            <div class="card">
+                <h1 class="title">Свяжитесь с нами</h1>
+                <p class="subtitle">Есть вопросы или предложения? Напишите нам!</p>
+                <!-- Форма обратной связи -->
+              <form class="contact-form" id="contactForm" action="https://formspree.io/f/mgorvwao" method="POST">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="ivan@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="theme">Тема сообщения</label>
+                        <input type="text" id="theme" name="theme" placeholder="Предложение / Вопрос / Ошибка">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message" placeholder="Опишите ваш вопрос или предложение..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Отправить сообщение</button>
+                </form>
+                <!-- Сообщение об успешной отправке (скрыто по умолчанию) -->
+                <div class="form-success" id="formSuccess" style="display: none;">
+                    <p>✅ Сообщение отправлено!</p>
+                    <p style="font-size: 14px; color: #86868b; margin-top: 8px;">Мы ответим вам в ближайшее время.</p>
+                </div>
+               <div class="contact-info">
+   <div class="contact-info">
+    <div class="contact-item">
+        <img src="img/email.png" alt="Email" class="contact-icon-img" width="28" height="28">
+        <span>hello@giftpicker.ru</span>
+    </div>
+    <div class="contact-item">
+        <img src="img/phone.png" alt="Телефон" class="contact-icon-img" width="28" height="28">
+        <span>+7 (999) 123-45-67</span>
+    </div>
+    <div class="contact-item">
+        <img src="img/google.png" alt="Адрес" class="contact-icon-img" width="28" height="28">
+        <span>г. Псков. Ул.Индустриальная 52</span>
+    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">© 2026 GiftPicker - подбор идеальных подарков</p>
+            <div class="footer-links">
+                <a href="about.html" class="footer-link">О сервисе</a>
+                <span class="footer-divider">•</span>
+                <a href="contacts.html" class="footer-link">Контакты</a>
+            </div>
+        </div>
+    </footer>
+  <script>
+    const form = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const submitBtn = form?.querySelector('.submit-btn');
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Отменяем стандартную отправку
+            // Блокируем кнопку, чтобы не нажать дважды
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Отправка...';
+            }
+            try {
+                // Собираем данные формы
+                const formData = new FormData(form);
+                // Отправляем на Formspree
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    // ✅ Успех
+                    form.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                    // Очищаем форму
+                    form.reset();
+                    // Логируем для отладки
+                    console.log('✅ Сообщение отправлено через Formspree');
+                } else {
+                    // ❌ Ошибка от сервера
+                    const errorData = await response.json();
+                    throw new Error(errorData.errors?.[0]?.message || 'Ошибка отправки');
+                }
+            } catch (error) {
+                // ❌ Ошибка сети или другая
+                console.error('Ошибка:', error);
+                alert('⚠️ Не удалось отправить сообщение. Попробуйте позже или напишите напрямую: hello@giftpicker.ru');
+            } finally {
+                // Возвращаем кнопку в исходное состояние
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Отправить сообщение';
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
